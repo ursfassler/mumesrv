@@ -14,6 +14,9 @@ QMAKE_CXXFLAGS += --std=c++11
 
 TEMPLATE = app
 
+target.path = /usr/bin
+INSTALLS += target
+
 dbusAdaptor.target = dbusAdaptor
 dbusAdaptor.commands = cd $$PWD/; \
     qdbusxml2cpp mumesrv.xml -a generated/MumeSrvAdaptor
