@@ -3,26 +3,45 @@
 
 #include "MumeSrv.hpp"
 #include "SysfsValue.hpp"
+#include "Configuration.hpp"
 #include "generated/MumeSrvAdaptor.h"
 
 #include <QCoreApplication>
 #include <QDBusConnection>
+#include <QCommandLineParser>
+#include <iostream>
 
-static void registerAtDbus(MumeSrv *srv)
+static void registerAtDbus(QDBusConnection dbus, MumeSrv *srv)
 {
   new MumeSrvAdaptor(srv);
-  QDBusConnection dbus = QDBusConnection::sessionBus();
   dbus.registerObject("/ch/bitzgi/mumesrv", srv);
   dbus.registerService("ch.bitzgi.MumeSrv");
+}
+
+static QDBusConnection getBus(bool useSystemBus)
+{
+  if (useSystemBus) {
+    return QDBusConnection::systemBus();
+  } else {
+    return QDBusConnection::sessionBus();
+  }
 }
 
 int main(int argc, char *argv[])
 {
   QCoreApplication a{argc, argv};
+  Configuration configuration{a.arguments()};
 
-  SysfsValue sysfsSwitch{"/sys/bus/platform/devices/mume/switch"};
+  if (!configuration.isValid()) {
+    std::cout << configuration.helpText().toStdString() << std::endl;
+    return -1;
+  }
+
+  SysfsValue sysfsSwitch{configuration.sysfsRoot() + "/switch"};
   MumeSrv mumesrv{sysfsSwitch, &a};
-  registerAtDbus(&mumesrv);
+
+  auto bus = getBus(configuration.useSystemDbus());
+  registerAtDbus(bus, &mumesrv);
 
   return a.exec();
 }

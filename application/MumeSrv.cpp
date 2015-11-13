@@ -11,7 +11,7 @@ MumeSrv::MumeSrv(const ISysfsReader &aSysfsSwitch, QObject* parent) :
 
 bool MumeSrv::isSwitchOn()
 {
-  const auto content = QString::fromStdString(sysfsSwitch.read()).trimmed();
+  const auto content = sysfsSwitch.read();
   return content == "on";
 }
 

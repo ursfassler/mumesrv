@@ -17,6 +17,8 @@ namespace
     const ::testing::NiceMock<SysfsReaderMock> sysfsSwitch;
     const MumeSrv testee{sysfsSwitch};
 
+    ON_CALL(sysfsSwitch, read()).WillByDefault(::testing::Return(QString("")));
+
     const auto property = testee.property("switchOn");
     ASSERT_TRUE(property.isValid());
     ASSERT_EQ(QVariant::Bool, property.type());
@@ -27,10 +29,10 @@ namespace
     const SysfsReaderMock sysfsSwitch;
     const MumeSrv testee{sysfsSwitch};
 
-    EXPECT_CALL(sysfsSwitch, read()).WillOnce(::testing::Return("on\n"));
+    EXPECT_CALL(sysfsSwitch, read()).WillOnce(::testing::Return(QString("on")));
     ASSERT_EQ(true, testee.property("switchOn").toBool());
 
-    EXPECT_CALL(sysfsSwitch, read()).WillOnce(::testing::Return("off\n"));
+    EXPECT_CALL(sysfsSwitch, read()).WillOnce(::testing::Return(QString("off")));
     ASSERT_EQ(false, testee.property("switchOn").toBool());
   }
 

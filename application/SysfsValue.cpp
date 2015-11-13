@@ -5,16 +5,16 @@
 
 #include <fstream>
 
-SysfsValue::SysfsValue(const std::string &aFilename) :
+SysfsValue::SysfsValue(QString aFilename) :
   filename{aFilename}
 {
 }
 
-std::string SysfsValue::read() const
+QString SysfsValue::read() const
 {
-  std::string content{""};
+  QString content{""};
 
-  std::ifstream file{filename, std::ifstream::in};
+  std::ifstream file{filename.toStdString(), std::ifstream::in};
 
   while (file.good()) {
     char buffer[100];
@@ -26,6 +26,6 @@ std::string SysfsValue::read() const
     content += buffer;
   }
 
-  return content;
+  return content.trimmed();
 }
 

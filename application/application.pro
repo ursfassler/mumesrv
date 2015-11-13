@@ -25,13 +25,15 @@ QMAKE_EXTRA_TARGETS += dbusAdaptor
 SOURCES += main.cpp \
     MumeSrv.cpp \
     generated/MumeSrvAdaptor.cpp \
-    SysfsValue.cpp
+    SysfsValue.cpp \
+    Configuration.cpp
 
 HEADERS += \
     MumeSrv.hpp \
     generated/MumeSrvAdaptor.h \
     SysfsValue.hpp \
-    ISysfs.hpp
+    ISysfs.hpp \
+    Configuration.hpp
 
 DISTFILES += \
     mumesrv.xml

@@ -3,7 +3,7 @@
 
 #include "SysfsReaderDummy.hpp"
 
-std::string SysfsReaderDummy::read() const
+QString SysfsReaderDummy::read() const
 {
   return read_return;
 }

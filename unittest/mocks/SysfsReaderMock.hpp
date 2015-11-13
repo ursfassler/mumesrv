@@ -9,7 +9,7 @@ class SysfsReaderMock :
     public ISysfsReader
 {
   public:
-    MOCK_CONST_METHOD0(read, std::string());
+    MOCK_CONST_METHOD0(read, QString());
 };
 
 #endif // SYSFSREADERMOCK

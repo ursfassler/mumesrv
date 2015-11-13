@@ -15,9 +15,12 @@ LIBS += -lgtest -lgmock -lgtest_main
 
 SOURCES += \
     MumeSrv_test.cpp \
-    ../application/MumeSrv.cpp
+    ../application/MumeSrv.cpp \
+    Configuration_test.cpp \
+    ../application/Configuration.cpp
 
 HEADERS += \
     ../application/MumeSrv.hpp \
-    mocks/SysfsReaderMock.hpp
+    mocks/SysfsReaderMock.hpp \
+    ../application/Configuration.hpp
 

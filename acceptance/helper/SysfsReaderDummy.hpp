@@ -10,8 +10,8 @@ class SysfsReaderDummy :
     public ISysfsReader
 {
   public:
-    std::string read_return{};
-    std::string read() const override;
+    QString read_return{};
+    QString read() const override;
 
 };
 

@@ -4,12 +4,12 @@
 #include <SysfsValue.hpp>
 
 #include <iostream>
-#include <vector>
-#include <string>
+#include <QList>
+#include <QString>
 
 int main()
 {
-  const std::vector<std::string> files{
+  const QList<QString> files{
     "/sys/class/tty/tty/dev",
     "/sys/class/tty/tty/uevent"
   };
@@ -17,8 +17,8 @@ int main()
   for (const auto &file : files) {
     const SysfsValue sysfs{file};
 
-    std::cout << "-- " << file << " --" << std::endl;
-    std::cout << sysfs.read() << std::endl;
+    std::cout << "-- " << file.toStdString() << " --" << std::endl;
+    std::cout << sysfs.read().toStdString() << std::endl;
     std::cout << std::endl;
   }
 

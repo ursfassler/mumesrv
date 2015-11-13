@@ -6,18 +6,18 @@
 
 #include <ISysfs.hpp>
 
-#include <string>
+#include <QString>
 
 class SysfsValue :
     public ISysfsReader
 {
   public:
-    SysfsValue(const std::string &filename);
+    SysfsValue(QString filename);
 
-    std::string read() const override;
+    QString read() const override;
 
   private:
-    const std::string filename;
+    const QString filename;
 };
 
 #endif // SYSFSVALUE_HPP

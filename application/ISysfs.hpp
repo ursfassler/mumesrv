@@ -4,14 +4,14 @@
 #ifndef ISYSFS
 #define ISYSFS
 
-#include <string>
+#include <QString>
 
 class ISysfsReader
 {
   public:
     virtual ~ISysfsReader() = default;
 
-    virtual std::string read() const = 0;
+    virtual QString read() const = 0;
 };
 
 #endif // ISYSFS

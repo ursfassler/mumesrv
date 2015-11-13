@@ -17,7 +17,7 @@ namespace
 
     cucumber::ScenarioScope<Context> context;
 
-    context->sysfsSwitch.read_return = sysfsContent;
+    context->sysfsSwitch.read_return = QString::fromStdString(sysfsContent);
   }
 
 }
