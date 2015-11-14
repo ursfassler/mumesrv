@@ -5,6 +5,6 @@
 
 QString SysfsReaderDummy::read() const
 {
-  return read_return;
+  return content;
 }
 

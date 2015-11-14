@@ -39,3 +39,9 @@ bool MumeSrvAdaptor::switchOn() const
     return qvariant_cast< bool >(parent()->property("switchOn"));
 }
 
+void MumeSrvAdaptor::setOpenPosition(double value)
+{
+    // handle method call ch.bitzgi.MumeSrv.setOpenPosition
+    QMetaObject::invokeMethod(parent(), "setOpenPosition", Q_ARG(double, value));
+}
+

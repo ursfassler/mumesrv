@@ -18,13 +18,16 @@ SOURCES += \
     ../application/MumeSrv.cpp \
     features/step_definitions/DbusSteps.cpp \
     features/step_definitions/SysfsSteps.cpp \
-    helper/SysfsReaderDummy.cpp
+    helper/SysfsReaderDummy.cpp \
+    helper/SysfsWriterDummy.cpp
 
 DISTFILES += \
     features/step_definitions/cucumber.wire \
-    features/read_state_of_switch.feature
+    features/read_state_of_switch.feature \
+    features/write_servo_end_positions.feature
 
 HEADERS += \
     ../application/MumeSrv.hpp \
     helper/Context.hpp \
-    helper/SysfsReaderDummy.hpp
+    helper/SysfsReaderDummy.hpp \
+    helper/SysfsWriterDummy.hpp

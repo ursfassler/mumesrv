@@ -3,10 +3,19 @@
 
 #include "MumeSrv.hpp"
 
-MumeSrv::MumeSrv(const ISysfsReader &aSysfsSwitch, QObject* parent) :
+MumeSrv::MumeSrv(const ISysfsReader &aSysfsSwitch, ISysfsWriter &aSysfsServoOpenPosNs, QObject* parent) :
   QObject(parent),
-  sysfsSwitch{aSysfsSwitch}
+  sysfsSwitch{aSysfsSwitch},
+  sysfsServoOpenPosNs{aSysfsServoOpenPosNs}
 {
+}
+
+void MumeSrv::setOpenPosition(double value)
+{
+  const quint32 ns = value * 1000*1000*1000;
+  const QString str = QString::number(ns);
+
+  sysfsServoOpenPosNs.write(str);
 }
 
 bool MumeSrv::isSwitchOn()
@@ -14,5 +23,3 @@ bool MumeSrv::isSwitchOn()
   const auto content = sysfsSwitch.read();
   return content == "on";
 }
-
-

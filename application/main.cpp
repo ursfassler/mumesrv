@@ -13,6 +13,7 @@
 
 static void registerAtDbus(QDBusConnection dbus, MumeSrv *srv)
 {
+  //TODO check return values and report errors
   new MumeSrvAdaptor(srv);
   dbus.registerObject("/ch/bitzgi/mumesrv", srv);
   dbus.registerService("ch.bitzgi.MumeSrv");
@@ -37,8 +38,9 @@ int main(int argc, char *argv[])
     return -1;
   }
 
-  SysfsValue sysfsSwitch{configuration.sysfsRoot() + "/switch"};
-  MumeSrv mumesrv{sysfsSwitch, &a};
+  SysfsRoValue sysfsSwitch{configuration.sysfsRoot() + "/switch"};
+  SysfsWoValue sysfsServoOpenPosNs{configuration.sysfsRoot() + "/open_pos_ns"};
+  MumeSrv mumesrv{sysfsSwitch, sysfsServoOpenPosNs, &a};
 
   auto bus = getBus(configuration.useSystemDbus());
   registerAtDbus(bus, &mumesrv);

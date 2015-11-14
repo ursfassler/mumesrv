@@ -5,6 +5,7 @@
 #define CONTEXT
 
 #include "SysfsReaderDummy.hpp"
+#include "SysfsWriterDummy.hpp"
 
 #include <MumeSrv.hpp>
 
@@ -12,7 +13,8 @@ class Context
 {
   public:
     SysfsReaderDummy sysfsSwitch{};
-    MumeSrv mumeSrv{sysfsSwitch};
+    SysfsWriterDummy sysfsServoOpenPosNs{};
+    MumeSrv mumeSrv{sysfsSwitch, sysfsServoOpenPosNs};
 };
 
 #endif // CONTEXT

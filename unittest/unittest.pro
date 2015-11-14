@@ -22,5 +22,6 @@ SOURCES += \
 HEADERS += \
     ../application/MumeSrv.hpp \
     mocks/SysfsReaderMock.hpp \
-    ../application/Configuration.hpp
+    ../application/Configuration.hpp \
+    mocks/SysfsWriterMock.hpp
 

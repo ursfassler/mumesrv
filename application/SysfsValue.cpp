@@ -5,12 +5,12 @@
 
 #include <fstream>
 
-SysfsValue::SysfsValue(QString aFilename) :
+SysfsRoValue::SysfsRoValue(QString aFilename) :
   filename{aFilename}
 {
 }
 
-QString SysfsValue::read() const
+QString SysfsRoValue::read() const
 {
   QString content{""};
 
@@ -29,3 +29,17 @@ QString SysfsValue::read() const
   return content.trimmed();
 }
 
+
+SysfsWoValue::SysfsWoValue(QString aFilename) :
+  filename{aFilename}
+{
+}
+
+void SysfsWoValue::write(QString value)
+{
+  const std::string content{value.toStdString() + "\n"};
+
+  std::ofstream file{filename.toStdString(), std::ifstream::out};
+
+  file.write(content.c_str(), content.size());
+}

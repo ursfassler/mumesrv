@@ -10,7 +10,7 @@ class SysfsReaderDummy :
     public ISysfsReader
 {
   public:
-    QString read_return{};
+    QString content{};
     QString read() const override;
 
 };

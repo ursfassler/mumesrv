@@ -11,6 +11,14 @@
 
 namespace
 {
+  WHEN("^I call the DBus method setOpenPosition with the argument ((\\d+)(\\.(\\d+))?)$")
+  {
+    REGEX_PARAM(double, value);
+
+    cucumber::ScenarioScope<Context> context;
+    QMetaObject::invokeMethod(&context->mumeSrv, "setOpenPosition", Q_ARG(double, value));
+  }
+
 
   THEN("^I expect the DBus property switchOn to read (true|false)$")
   {

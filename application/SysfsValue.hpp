@@ -8,13 +8,25 @@
 
 #include <QString>
 
-class SysfsValue :
+class SysfsRoValue :
     public ISysfsReader
 {
   public:
-    SysfsValue(QString filename);
+    SysfsRoValue(QString filename);
 
     QString read() const override;
+
+  private:
+    const QString filename;
+};
+
+class SysfsWoValue :
+    public ISysfsWriter
+{
+  public:
+    SysfsWoValue(QString filename);
+
+    void write(QString value) override;
 
   private:
     const QString filename;

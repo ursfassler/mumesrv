@@ -14,5 +14,14 @@ class ISysfsReader
     virtual QString read() const = 0;
 };
 
+class ISysfsWriter
+{
+  public:
+    virtual ~ISysfsWriter() = default;
+
+    virtual void write(QString value) = 0;
+
+};
+
 #endif // ISYSFS
 

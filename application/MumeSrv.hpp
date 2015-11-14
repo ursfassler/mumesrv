@@ -16,10 +16,14 @@ class MumeSrv :
     Q_PROPERTY(bool switchOn READ isSwitchOn())
 
   public:
-    MumeSrv(const ISysfsReader &sysfsSwitch, QObject* parent = 0);
+    MumeSrv(const ISysfsReader &sysfsSwitch, ISysfsWriter &sysfsServoOpenPosNs, QObject* parent = 0);
+
+  public slots:
+    void setOpenPosition(double value);
 
   private:
     const ISysfsReader &sysfsSwitch;
+    ISysfsWriter &sysfsServoOpenPosNs;
 
     bool isSwitchOn();
 

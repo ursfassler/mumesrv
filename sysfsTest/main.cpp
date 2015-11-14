@@ -15,7 +15,7 @@ int main()
   };
 
   for (const auto &file : files) {
-    const SysfsValue sysfs{file};
+    const SysfsRoValue sysfs{file};
 
     std::cout << "-- " << file.toStdString() << " --" << std::endl;
     std::cout << sysfs.read().toStdString() << std::endl;
