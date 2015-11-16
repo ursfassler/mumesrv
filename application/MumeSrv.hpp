@@ -5,11 +5,13 @@
 #define MUMESRV_HPP
 
 #include "ISysfs.hpp"
+#include "IMumeSrv.hpp"
 
 #include <QObject>
 
 class MumeSrv :
-    public QObject
+    public QObject,
+    public IMumeSrv
 {
     Q_OBJECT
 

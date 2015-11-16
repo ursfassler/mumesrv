@@ -5,6 +5,8 @@
 #include "SysfsValue.hpp"
 #include "Configuration.hpp"
 #include "generated/MumeSrvAdaptor.h"
+#include "Application.hpp"
+#include "Persistence.hpp"
 
 #include <QCoreApplication>
 #include <QDBusConnection>
@@ -44,6 +46,10 @@ int main(int argc, char *argv[])
 
   auto bus = getBus(configuration.useSystemDbus());
   registerAtDbus(bus, &mumesrv);
+
+  Persistence persistence;
+  Application app{persistence, mumesrv};
+  app.init();
 
   return a.exec();
 }

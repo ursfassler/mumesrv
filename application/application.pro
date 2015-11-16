@@ -26,14 +26,20 @@ SOURCES += main.cpp \
     MumeSrv.cpp \
     generated/MumeSrvAdaptor.cpp \
     SysfsValue.cpp \
-    Configuration.cpp
+    Configuration.cpp \
+    Application.cpp \
+    Persistence.cpp
 
 HEADERS += \
     MumeSrv.hpp \
     generated/MumeSrvAdaptor.h \
     SysfsValue.hpp \
     ISysfs.hpp \
-    Configuration.hpp
+    Configuration.hpp \
+    Application.hpp \
+    IPersistence.hpp \
+    IMumeSrv.hpp \
+    Persistence.hpp
 
 DISTFILES += \
     mumesrv.xml

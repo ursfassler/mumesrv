@@ -17,11 +17,16 @@ SOURCES += \
     MumeSrv_test.cpp \
     ../application/MumeSrv.cpp \
     Configuration_test.cpp \
-    ../application/Configuration.cpp
+    ../application/Configuration.cpp \
+    Application_test.cpp \
+    ../application/Application.cpp
 
 HEADERS += \
     ../application/MumeSrv.hpp \
     mocks/SysfsReaderMock.hpp \
     ../application/Configuration.hpp \
-    mocks/SysfsWriterMock.hpp
+    mocks/SysfsWriterMock.hpp \
+    mocks/PersistenceMock.hpp \
+    ../application/Application.hpp \
+    mocks/MumeSrvMock.hpp
 

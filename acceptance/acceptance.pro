@@ -19,7 +19,11 @@ SOURCES += \
     features/step_definitions/DbusSteps.cpp \
     features/step_definitions/SysfsSteps.cpp \
     helper/SysfsReaderDummy.cpp \
-    helper/SysfsWriterDummy.cpp
+    helper/SysfsWriterDummy.cpp \
+    features/step_definitions/PersistenceSteps.cpp \
+    features/step_definitions/ServiceSteps.cpp \
+    helper/PersistenceDummy.cpp \
+    ../application/Application.cpp
 
 DISTFILES += \
     features/step_definitions/cucumber.wire \
@@ -30,4 +34,9 @@ HEADERS += \
     ../application/MumeSrv.hpp \
     helper/Context.hpp \
     helper/SysfsReaderDummy.hpp \
-    helper/SysfsWriterDummy.hpp
+    helper/SysfsWriterDummy.hpp \
+    helper/PersistenceDummy.hpp \
+    ../application/Application.hpp
+
+OTHER_FILES += \
+    features/load_servo_end_position_from_persistence.feature

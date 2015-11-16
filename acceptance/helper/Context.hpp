@@ -6,15 +6,19 @@
 
 #include "SysfsReaderDummy.hpp"
 #include "SysfsWriterDummy.hpp"
+#include "PersistenceDummy.hpp"
 
 #include <MumeSrv.hpp>
+#include <Application.hpp>
 
 class Context
 {
   public:
+    PersistenceDummy persistence;
     SysfsReaderDummy sysfsSwitch{};
     SysfsWriterDummy sysfsServoOpenPosNs{};
     MumeSrv mumeSrv{sysfsSwitch, sysfsServoOpenPosNs};
+    Application application{persistence, mumeSrv};
 };
 
 #endif // CONTEXT
