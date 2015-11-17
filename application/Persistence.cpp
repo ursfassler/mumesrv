@@ -12,3 +12,8 @@ QString Persistence::read(QString key) const
 {
   return storage.value(key).toString();
 }
+
+void Persistence::write(QString key, QString value)
+{
+  storage.setValue(key, value);
+}

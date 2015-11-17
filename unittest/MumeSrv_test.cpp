@@ -9,6 +9,7 @@
 #include <gtest/gtest.h>
 
 #include <QVariant>
+#include <QSignalSpy>
 
 namespace
 {
@@ -17,7 +18,7 @@ namespace
       public testing::Test
   {
     public:
-      const SysfsReaderMock sysfsSwitch;
+      const testing::NiceMock<SysfsReaderMock> sysfsSwitch;
       SysfsWriterMock sysfsServoOpenPosNs;
       MumeSrv testee{sysfsSwitch, sysfsServoOpenPosNs};
   };
@@ -62,6 +63,19 @@ namespace
   {
     EXPECT_CALL(sysfsServoOpenPosNs, write(QString("3456000000"))).Times(1);
     QMetaObject::invokeMethod(&testee, "setOpenPosition", Q_ARG(double, 3.456));
+  }
+
+  TEST_F(MumeSrv_Test, write_servoOpenPosNs_sends_signal)
+  {
+    EXPECT_CALL(sysfsServoOpenPosNs, write(testing::_));
+    QSignalSpy spy{&testee, SIGNAL(openPositionChanged(double))};
+
+    QMetaObject::invokeMethod(&testee, "setOpenPosition", Q_ARG(double, 3.456));
+
+    ASSERT_EQ(1, spy.count());
+    const auto args = spy[0];
+    ASSERT_EQ(1, args.count());
+    ASSERT_DOUBLE_EQ(3.456, args[0].toDouble());
   }
 }
 

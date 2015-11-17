@@ -23,7 +23,8 @@ SOURCES += \
     features/step_definitions/PersistenceSteps.cpp \
     features/step_definitions/ServiceSteps.cpp \
     helper/PersistenceDummy.cpp \
-    ../application/Application.cpp
+    ../application/Application.cpp \
+    ../application/IMumeSrv.cpp
 
 DISTFILES += \
     features/step_definitions/cucumber.wire \
@@ -36,7 +37,8 @@ HEADERS += \
     helper/SysfsReaderDummy.hpp \
     helper/SysfsWriterDummy.hpp \
     helper/PersistenceDummy.hpp \
-    ../application/Application.hpp
+    ../application/Application.hpp \
+    ../application/IMumeSrv.hpp
 
 OTHER_FILES += \
-    features/load_servo_end_position_from_persistence.feature
+    features/persistent_servo_end_positions.feature

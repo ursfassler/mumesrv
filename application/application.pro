@@ -28,7 +28,8 @@ SOURCES += main.cpp \
     SysfsValue.cpp \
     Configuration.cpp \
     Application.cpp \
-    Persistence.cpp
+    Persistence.cpp \
+    IMumeSrv.cpp
 
 HEADERS += \
     MumeSrv.hpp \

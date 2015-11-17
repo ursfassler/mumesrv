@@ -3,7 +3,7 @@
 
 # language: en
 
-Feature: Load servo end position from persistence
+Feature: The servo end positions are persistent
   As a MUME user
   I want the device to have the correct end positions
   In order to use it without reconfiguration after boot
@@ -23,3 +23,16 @@ Scenario Outline: I start the service and the open position is written to the dr
     |   0.000000001 |             1 |
     |   0.000000123 |           123 |
     |   0.001       |       1000000 |
+
+Scenario Outline: The servo open position is stored to persistence when written over the bus
+  When I call the DBus method setOpenPosition with the argument <dbus value>
+
+  Then I expect a persistence entry "servo_open_pos_ns" with the value "<config value>"
+
+  Examples:
+    |  dbus value  | config value |
+    |  0           |  0.000000000 |
+    |  1           |  1.000000000 |
+    |  0.000000001 |  0.000000001 |
+    |  0.000000123 |  0.000000123 |
+    |  0.001       |  0.001000000 |

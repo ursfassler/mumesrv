@@ -10,7 +10,6 @@
 #include <QObject>
 
 class MumeSrv :
-    public QObject,
     public IMumeSrv
 {
     Q_OBJECT

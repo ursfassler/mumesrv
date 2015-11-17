@@ -4,7 +4,7 @@
 #include "MumeSrv.hpp"
 
 MumeSrv::MumeSrv(const ISysfsReader &aSysfsSwitch, ISysfsWriter &aSysfsServoOpenPosNs, QObject* parent) :
-  QObject(parent),
+  IMumeSrv{parent},
   sysfsSwitch{aSysfsSwitch},
   sysfsServoOpenPosNs{aSysfsServoOpenPosNs}
 {
@@ -16,6 +16,7 @@ void MumeSrv::setOpenPosition(double value)
   const QString str = QString::number(ns);
 
   sysfsServoOpenPosNs.write(str);
+  openPositionChanged(value);
 }
 
 bool MumeSrv::isSwitchOn()

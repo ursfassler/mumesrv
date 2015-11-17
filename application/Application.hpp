@@ -7,12 +7,20 @@
 #include "IPersistence.hpp"
 #include "IMumeSrv.hpp"
 
-class Application
+#include <QObject>
+
+class Application :
+    public QObject
 {
+    Q_OBJECT
+
   public:
     Application(IPersistence &persistence, IMumeSrv &mumeSrv);
 
     void init();
+
+  private slots:
+    void setOpenPosition(double value);
 
   private:
     IPersistence &persistence;

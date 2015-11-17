@@ -12,6 +12,7 @@ class IPersistence
     virtual ~IPersistence() = default;
 
     virtual QString read(QString key) const = 0;
+    virtual void write(QString key, QString value) = 0;
 };
 
 #endif // IPERSISTENCE_H

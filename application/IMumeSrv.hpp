@@ -4,12 +4,21 @@
 #ifndef IMUMESRV_HPP
 #define IMUMESRV_HPP
 
-class IMumeSrv
+#include <QObject>
+
+class IMumeSrv :
+    public QObject
 {
+    Q_OBJECT
+
   public:
-    virtual ~IMumeSrv() = default;
+    IMumeSrv(QObject *parent = nullptr);
+    virtual ~IMumeSrv();
 
     virtual void setOpenPosition(double value) = 0;
+
+  signals:
+    void openPositionChanged(double value);
 };
 
 #endif // IMUMESRV_H

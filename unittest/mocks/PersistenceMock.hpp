@@ -13,6 +13,7 @@ class PersistenceMock :
 {
   public:
     MOCK_CONST_METHOD1(read, QString(QString));
+    MOCK_METHOD2(write, void(QString,QString));
 };
 
 #endif // PERSISTENCEMOCK_H

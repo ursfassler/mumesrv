@@ -15,7 +15,7 @@ class PersistenceDummy :
   public:
     PersistenceDummy();
 
-    void write(QString key, QString value);
+    void write(QString key, QString value) override;
     QString read(QString key) const override;
 
   private:

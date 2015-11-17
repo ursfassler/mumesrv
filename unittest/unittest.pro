@@ -6,6 +6,7 @@ CONFIG += console c++11
 CONFIG -= app_bundle
 
 QT += xml
+QT += testlib
 
 QMAKE_CXXFLAGS += --std=c++11
 
@@ -19,7 +20,8 @@ SOURCES += \
     Configuration_test.cpp \
     ../application/Configuration.cpp \
     Application_test.cpp \
-    ../application/Application.cpp
+    ../application/Application.cpp \
+    ../application/IMumeSrv.cpp
 
 HEADERS += \
     ../application/MumeSrv.hpp \
@@ -28,5 +30,6 @@ HEADERS += \
     mocks/SysfsWriterMock.hpp \
     mocks/PersistenceMock.hpp \
     ../application/Application.hpp \
-    mocks/MumeSrvMock.hpp
+    mocks/MumeSrvMock.hpp \
+    ../application/IMumeSrv.hpp
 

@@ -7,6 +7,7 @@ Application::Application(IPersistence &aPersistence, IMumeSrv &aMumeSrv) :
   persistence{aPersistence},
   mumeSrv{aMumeSrv}
 {
+  QObject::connect(&aMumeSrv, SIGNAL(openPositionChanged(double)), this, SLOT(setOpenPosition(double)));
 }
 
 void Application::init()
@@ -17,4 +18,9 @@ void Application::init()
   if (ok) {
     mumeSrv.setOpenPosition(value);
   }
+}
+
+void Application::setOpenPosition(double value)
+{
+  persistence.write("servo_open_pos_ns", QString::number(value, 'f', 9));
 }

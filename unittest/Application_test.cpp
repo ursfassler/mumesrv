@@ -36,4 +36,10 @@ namespace
     testee.init();
   }
 
+  TEST_F(Application_Test, write_double_to_persistence)
+  {
+    EXPECT_CALL(persistence, write(QString{"servo_open_pos_ns"}, QString{"1.000000000"}));
+    mumeSrv.openPositionChanged(1);
+  }
+
 }
