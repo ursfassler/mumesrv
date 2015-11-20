@@ -33,7 +33,7 @@ class MumeSrvAdaptor: public QDBusAbstractAdaptor
     Q_CLASSINFO("D-Bus Introspection", ""
 "  <interface name=\"ch.bitzgi.MumeSrv\">\n"
 "    <property access=\"read\" type=\"b\" name=\"switchOn\"/>\n"
-"    <method name=\"setOpenPosition\">\n"
+"    <method name=\"setOpenPositionMs\">\n"
 "      <arg direction=\"in\" type=\"d\" name=\"value\"/>\n"
 "    </method>\n"
 "  </interface>\n"
@@ -47,7 +47,7 @@ public: // PROPERTIES
     bool switchOn() const;
 
 public Q_SLOTS: // METHODS
-    void setOpenPosition(double value);
+    void setOpenPositionMs(double value);
 Q_SIGNALS: // SIGNALS
 };
 

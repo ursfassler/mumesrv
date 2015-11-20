@@ -12,7 +12,7 @@ class MumeSrvMock :
     public IMumeSrv
 {
   public:
-    MOCK_METHOD1(setOpenPosition, void(double value));
+    MOCK_METHOD1(setOpenPositionMs, void(double value));
 };
 
 #endif // MUMESRVMOCK_H

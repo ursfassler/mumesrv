@@ -11,20 +11,20 @@
 namespace
 {
 
-  GIVEN("^there is a persistence entry \"servo_open_pos_ns\" with the value \"([^\"]*)\"$")
+  GIVEN("^there is a persistence entry \"servo\" \"open_pos_ms\" with the value \"([^\"]*)\"$")
   {
     REGEX_PARAM(std::string, value);
 
     cucumber::ScenarioScope<Context> context;
-    context->persistence.write("servo_open_pos_ns", QString::fromStdString(value));
+    context->persistence.write("servo", "open_pos_ms", QString::fromStdString(value));
   }
 
-  THEN("^I expect a persistence entry \"servo_open_pos_ns\" with the value \"([^\"]*)\"$")
+  THEN("^I expect a persistence entry \"servo\" \"open_pos_ms\" with the value \"([^\"]*)\"$")
   {
     REGEX_PARAM(std::string, value);
 
     cucumber::ScenarioScope<Context> context;
-    ASSERT_EQ(value, context->persistence.read("servo_open_pos_ns").toStdString());
+    ASSERT_EQ(value, context->persistence.read("servo", "open_pos_ms").toStdString());
   }
 
 

@@ -4,16 +4,21 @@
 #include "Persistence.hpp"
 
 Persistence::Persistence() :
-  storage{QSettings::NativeFormat, QSettings::SystemScope, "urs"}
+  storage{QSettings::NativeFormat, QSettings::SystemScope, "urs", "mumesrv"}
 {
 }
 
-QString Persistence::read(QString key) const
+static QString seckey(QString section, QString key)
 {
-  return storage.value(key).toString();
+  return section + "/" + key;
 }
 
-void Persistence::write(QString key, QString value)
+QString Persistence::read(QString section, QString key) const
 {
-  storage.setValue(key, value);
+  return storage.value(seckey(section,key)).toString();
+}
+
+void Persistence::write(QString section, QString key, QString value)
+{
+  storage.setValue(seckey(section,key), value);
 }

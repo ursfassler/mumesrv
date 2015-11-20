@@ -7,13 +7,13 @@ PersistenceDummy::PersistenceDummy()
 {
 }
 
-void PersistenceDummy::write(QString key, QString value)
+void PersistenceDummy::write(QString section, QString key, QString value)
 {
-  values[key] = value;
+  values[section][key] = value;
 }
 
 
-QString PersistenceDummy::read(QString key) const
+QString PersistenceDummy::read(QString section, QString key) const
 {
-  return values.value(key, {});
+  return values.value(section, {}).value(key, {});
 }

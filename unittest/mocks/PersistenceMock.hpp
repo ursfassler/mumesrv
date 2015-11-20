@@ -12,8 +12,8 @@ class PersistenceMock :
     public IPersistence
 {
   public:
-    MOCK_CONST_METHOD1(read, QString(QString));
-    MOCK_METHOD2(write, void(QString,QString));
+    MOCK_CONST_METHOD2(read, QString(QString,QString));
+    MOCK_METHOD3(write, void(QString,QString,QString));
 };
 
 #endif // PERSISTENCEMOCK_H

@@ -20,7 +20,7 @@ class Application :
     void init();
 
   private slots:
-    void setOpenPosition(double value);
+    void setOpenPositionMs(double value);
 
   private:
     IPersistence &persistence;

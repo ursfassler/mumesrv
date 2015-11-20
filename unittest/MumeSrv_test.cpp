@@ -41,36 +41,36 @@ namespace
     ASSERT_EQ(false, testee.property("switchOn").toBool());
   }
 
-  TEST_F(MumeSrv_Test, write_0_via_servoOpenPosNs_to_sysfs)
+  TEST_F(MumeSrv_Test, write_0_via_setOpenPositionMs_to_sysfs)
   {
     EXPECT_CALL(sysfsServoOpenPosNs, write(QString("0"))).Times(1);
-    QMetaObject::invokeMethod(&testee, "setOpenPosition", Q_ARG(double, 0));
+    QMetaObject::invokeMethod(&testee, "setOpenPositionMs", Q_ARG(double, 0));
   }
 
-  TEST_F(MumeSrv_Test, write_1_via_servoOpenPosNs_to_sysfs)
+  TEST_F(MumeSrv_Test, write_1000_via_setOpenPositionMs_to_sysfs)
   {
     EXPECT_CALL(sysfsServoOpenPosNs, write(QString("1000000000"))).Times(1);
-    QMetaObject::invokeMethod(&testee, "setOpenPosition", Q_ARG(double, 1));
+    QMetaObject::invokeMethod(&testee, "setOpenPositionMs", Q_ARG(double, 1000));
   }
 
-  TEST_F(MumeSrv_Test, write_0_0001_via_servoOpenPosNs_to_sysfs)
+  TEST_F(MumeSrv_Test, write_0_1_via_setOpenPositionMs_to_sysfs)
   {
     EXPECT_CALL(sysfsServoOpenPosNs, write(QString("100000"))).Times(1);
-    QMetaObject::invokeMethod(&testee, "setOpenPosition", Q_ARG(double, 0.0001));
+    QMetaObject::invokeMethod(&testee, "setOpenPositionMs", Q_ARG(double, 0.1));
   }
 
-  TEST_F(MumeSrv_Test, write_3_456_via_servoOpenPosNs_to_sysfs)
+  TEST_F(MumeSrv_Test, write_3_456_via_setOpenPositionMs_to_sysfs)
   {
-    EXPECT_CALL(sysfsServoOpenPosNs, write(QString("3456000000"))).Times(1);
-    QMetaObject::invokeMethod(&testee, "setOpenPosition", Q_ARG(double, 3.456));
+    EXPECT_CALL(sysfsServoOpenPosNs, write(QString("3456000"))).Times(1);
+    QMetaObject::invokeMethod(&testee, "setOpenPositionMs", Q_ARG(double, 3.456));
   }
 
-  TEST_F(MumeSrv_Test, write_servoOpenPosNs_sends_signal)
+  TEST_F(MumeSrv_Test, write_setOpenPositionMs_sends_signal)
   {
     EXPECT_CALL(sysfsServoOpenPosNs, write(testing::_));
-    QSignalSpy spy{&testee, SIGNAL(openPositionChanged(double))};
+    QSignalSpy spy{&testee, SIGNAL(openPositionMsChanged(double))};
 
-    QMetaObject::invokeMethod(&testee, "setOpenPosition", Q_ARG(double, 3.456));
+    QMetaObject::invokeMethod(&testee, "setOpenPositionMs", Q_ARG(double, 3.456));
 
     ASSERT_EQ(1, spy.count());
     const auto args = spy[0];

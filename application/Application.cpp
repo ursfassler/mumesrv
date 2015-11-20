@@ -7,20 +7,20 @@ Application::Application(IPersistence &aPersistence, IMumeSrv &aMumeSrv) :
   persistence{aPersistence},
   mumeSrv{aMumeSrv}
 {
-  QObject::connect(&aMumeSrv, SIGNAL(openPositionChanged(double)), this, SLOT(setOpenPosition(double)));
+  QObject::connect(&aMumeSrv, SIGNAL(openPositionMsChanged(double)), this, SLOT(setOpenPositionMs(double)));
 }
 
 void Application::init()
 {
-  const auto textValue = persistence.read("servo_open_pos_ns");
+  const auto textValue = persistence.read("servo", "open_pos_ms");
   bool ok = false;
   const auto value = textValue.toDouble(&ok);
   if (ok) {
-    mumeSrv.setOpenPosition(value);
+    mumeSrv.setOpenPositionMs(value);
   }
 }
 
-void Application::setOpenPosition(double value)
+void Application::setOpenPositionMs(double value)
 {
-  persistence.write("servo_open_pos_ns", QString::number(value, 'f', 9));
+  persistence.write("servo", "open_pos_ms", QString::number(value, 'f', 6));
 }

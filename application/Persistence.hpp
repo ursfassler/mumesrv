@@ -15,8 +15,8 @@ class Persistence :
   public:
     Persistence();
 
-    QString read(QString key) const override;
-    void write(QString key, QString value) override;
+    QString read(QString section, QString key) const override;
+    void write(QString section, QString key, QString value) override;
 
   private:
     QSettings storage;

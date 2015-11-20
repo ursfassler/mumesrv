@@ -20,7 +20,7 @@ class MumeSrv :
     MumeSrv(const ISysfsReader &sysfsSwitch, ISysfsWriter &sysfsServoOpenPosNs, QObject* parent = 0);
 
   public slots:
-    void setOpenPosition(double value);
+    void setOpenPositionMs(double value);
 
   private:
     const ISysfsReader &sysfsSwitch;

@@ -15,10 +15,10 @@ class IMumeSrv :
     IMumeSrv(QObject *parent = nullptr);
     virtual ~IMumeSrv();
 
-    virtual void setOpenPosition(double value) = 0;
+    virtual void setOpenPositionMs(double value) = 0;
 
   signals:
-    void openPositionChanged(double value);
+    void openPositionMsChanged(double value);
 };
 
 #endif // IMUMESRV_H
