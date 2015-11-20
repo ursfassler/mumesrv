@@ -41,8 +41,9 @@ int main(int argc, char *argv[])
   }
 
   SysfsRoValue sysfsSwitch{configuration.sysfsRoot() + "/switch"};
+  SysfsRoValue sysfsCount{configuration.sysfsRoot() + "/count"};
   SysfsWoValue sysfsServoOpenPosNs{configuration.sysfsRoot() + "/open_pos_ns"};
-  MumeSrv mumesrv{sysfsSwitch, sysfsServoOpenPosNs, &a};
+  MumeSrv mumesrv{sysfsSwitch, sysfsCount, sysfsServoOpenPosNs, &a};
 
   auto bus = getBus(configuration.useSystemDbus());
   registerAtDbus(bus, &mumesrv);

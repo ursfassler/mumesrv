@@ -3,9 +3,10 @@
 
 #include "MumeSrv.hpp"
 
-MumeSrv::MumeSrv(const ISysfsReader &aSysfsSwitch, ISysfsWriter &aSysfsServoOpenPosNs, QObject* parent) :
+MumeSrv::MumeSrv(const ISysfsReader &aSysfsSwitch, const ISysfsReader &aSysfsCount, ISysfsWriter &aSysfsServoOpenPosNs, QObject* parent) :
   IMumeSrv{parent},
   sysfsSwitch{aSysfsSwitch},
+  sysfsCount{aSysfsCount},
   sysfsServoOpenPosNs{aSysfsServoOpenPosNs}
 {
 }
@@ -23,4 +24,10 @@ bool MumeSrv::isSwitchOn()
 {
   const auto content = sysfsSwitch.read();
   return content == "on";
+}
+
+uint MumeSrv::count()
+{
+  const auto content = sysfsCount.read();
+  return content.toUInt();
 }

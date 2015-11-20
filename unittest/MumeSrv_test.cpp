@@ -19,8 +19,9 @@ namespace
   {
     public:
       const testing::NiceMock<SysfsReaderMock> sysfsSwitch;
+      const testing::NiceMock<SysfsReaderMock> sysfsCount;
       SysfsWriterMock sysfsServoOpenPosNs;
-      MumeSrv testee{sysfsSwitch, sysfsServoOpenPosNs};
+      MumeSrv testee{sysfsSwitch, sysfsCount, sysfsServoOpenPosNs};
   };
 
   TEST_F(MumeSrv_Test, has_boolean_switchOn_property)
@@ -40,6 +41,28 @@ namespace
     EXPECT_CALL(sysfsSwitch, read()).WillOnce(::testing::Return(QString("off")));
     ASSERT_EQ(false, testee.property("switchOn").toBool());
   }
+
+  TEST_F(MumeSrv_Test, has_uint_count_property)
+  {
+    ON_CALL(sysfsCount, read()).WillByDefault(::testing::Return(QString("")));
+
+    const auto property = testee.property("count");
+    ASSERT_TRUE(property.isValid());
+    ASSERT_EQ(QVariant::UInt, property.type());
+  }
+
+  TEST_F(MumeSrv_Test, read_count_property)
+  {
+    EXPECT_CALL(sysfsCount, read()).WillOnce(::testing::Return(QString("0")));
+    ASSERT_EQ(0, testee.property("count").toUInt());
+
+    EXPECT_CALL(sysfsCount, read()).WillOnce(::testing::Return(QString("1")));
+    ASSERT_EQ(1, testee.property("count").toUInt());
+
+    EXPECT_CALL(sysfsCount, read()).WillOnce(::testing::Return(QString("42")));
+    ASSERT_EQ(42, testee.property("count").toUInt());
+  }
+
 
   TEST_F(MumeSrv_Test, write_0_via_setOpenPositionMs_to_sysfs)
   {

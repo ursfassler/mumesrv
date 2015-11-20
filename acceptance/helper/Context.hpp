@@ -16,8 +16,9 @@ class Context
   public:
     PersistenceDummy persistence;
     SysfsReaderDummy sysfsSwitch{};
+    SysfsReaderDummy sysfsCount{};
     SysfsWriterDummy sysfsServoOpenPosNs{};
-    MumeSrv mumeSrv{sysfsSwitch, sysfsServoOpenPosNs};
+    MumeSrv mumeSrv{sysfsSwitch, sysfsCount, sysfsServoOpenPosNs};
     Application application{persistence, mumeSrv};
 };
 

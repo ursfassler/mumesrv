@@ -32,4 +32,14 @@ namespace
     ASSERT_EQ(expectedState, property.toBool());
   }
 
+  THEN("^I expect the DBus property count to read (\\d+)$")
+  {
+    REGEX_PARAM(uint32_t, count);
+
+    cucumber::ScenarioScope<Context> context;
+    const auto property = context->mumeSrv.property("count");
+    ASSERT_TRUE(property.isValid());
+    ASSERT_EQ(count, property.toUInt());
+  }
+
 }

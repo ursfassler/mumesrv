@@ -3,7 +3,11 @@
 <node name="/ch/bitzgi/mumesrv">
   <interface name="ch.bitzgi.MumeSrv">
     <property name="switchOn" type="b" access="read"/>
+    <property name="count" type="u" access="read"/>
     <method name="setOpenPositionMs">
+      <arg name="value" type="d" direction="in"/>
+    </method>
+    <method name="setClosePositionMs">
       <arg name="value" type="d" direction="in"/>
     </method>
   </interface>

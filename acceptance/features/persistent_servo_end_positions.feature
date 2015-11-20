@@ -14,7 +14,7 @@ Scenario Outline: I start the service and the open position is written to the dr
 
   When I start the service
 
-  Then I expect the content of the sysfs file servo_open_pos_ns to be <sysfs content>
+  Then I expect the content of the sysfs file servo_open_pos_ns to be "<sysfs content>"
 
   Examples:
     |  config value | sysfs content |

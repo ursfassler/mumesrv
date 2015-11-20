@@ -11,7 +11,7 @@
 namespace
 {
 
-  GIVEN("^the sysfs file switch returns (on|off)$")
+  GIVEN("^the sysfs file switch returns \"([^\"]*)\"$")
   {
     REGEX_PARAM(std::string, sysfsContent);
 
@@ -20,11 +20,20 @@ namespace
     context->sysfsSwitch.content = QString::fromStdString(sysfsContent);
   }
 
+  GIVEN("^the sysfs file count returns \"([^\"]*)\"$")
+  {
+    REGEX_PARAM(std::string, sysfsContent);
+
+    cucumber::ScenarioScope<Context> context;
+
+    context->sysfsCount.content = QString::fromStdString(sysfsContent);
+  }
+
   GIVEN("^the sysfs file servo_open_pos_ns is writeable$")
   {
   }
 
-  THEN("^I expect the content of the sysfs file servo_open_pos_ns to be (\\d+)$")
+  THEN("^I expect the content of the sysfs file servo_open_pos_ns to be \"([^\"]*)\"$")
   {
     REGEX_PARAM(std::string, expected);
 

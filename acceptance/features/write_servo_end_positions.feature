@@ -13,7 +13,7 @@ Scenario Outline: I write the servo open position and see the value written into
 
   When I call the DBus method setOpenPositionMs with the argument <dbus value>
 
-  Then I expect the content of the sysfs file servo_open_pos_ns to be <sysfs content>
+  Then I expect the content of the sysfs file servo_open_pos_ns to be "<sysfs content>"
 
   Examples:
     |  dbus value  | sysfs content |

@@ -33,10 +33,22 @@ MumeSrvAdaptor::~MumeSrvAdaptor()
     // destructor
 }
 
+uint MumeSrvAdaptor::count() const
+{
+    // get the value of property count
+    return qvariant_cast< uint >(parent()->property("count"));
+}
+
 bool MumeSrvAdaptor::switchOn() const
 {
     // get the value of property switchOn
     return qvariant_cast< bool >(parent()->property("switchOn"));
+}
+
+void MumeSrvAdaptor::setClosePositionMs(double value)
+{
+    // handle method call ch.bitzgi.MumeSrv.setClosePositionMs
+    QMetaObject::invokeMethod(parent(), "setClosePositionMs", Q_ARG(double, value));
 }
 
 void MumeSrvAdaptor::setOpenPositionMs(double value)
