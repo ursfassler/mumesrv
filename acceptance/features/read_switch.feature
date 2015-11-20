@@ -3,12 +3,12 @@
 
 # language: en
 
-Feature: Read state of switch
+Feature: Read switch information
   As a DBus client
-  I want to read the state of the switch
+  I want to read switch information
   In order to process it
 
-Scenario Outline: I read the switch and get the state according to the sysfs entry
+Scenario Outline: I read the switch state and get the state according to the sysfs entry
   Given the sysfs file switch returns <sysfs content>
 
   Then I expect the DBus property switchOn to read <dbus value>

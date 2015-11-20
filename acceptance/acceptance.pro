@@ -28,8 +28,8 @@ SOURCES += \
 
 DISTFILES += \
     features/step_definitions/cucumber.wire \
-    features/read_state_of_switch.feature \
-    features/write_servo_end_positions.feature
+    features/write_servo_end_positions.feature \
+    features/read_switch.feature
 
 HEADERS += \
     ../application/MumeSrv.hpp \
