@@ -18,7 +18,8 @@ class Context
     SysfsReaderDummy sysfsSwitch{};
     SysfsReaderDummy sysfsCount{};
     SysfsWriterDummy sysfsServoOpenPosNs{};
-    MumeSrv mumeSrv{sysfsSwitch, sysfsCount, sysfsServoOpenPosNs};
+    SysfsWriterDummy sysfsServoClosePosNs{};
+    MumeSrv mumeSrv{sysfsSwitch, sysfsCount, sysfsServoOpenPosNs, sysfsServoClosePosNs};
     Application application{persistence, mumeSrv};
 };
 

@@ -21,7 +21,8 @@ namespace
       const testing::NiceMock<SysfsReaderMock> sysfsSwitch;
       const testing::NiceMock<SysfsReaderMock> sysfsCount;
       SysfsWriterMock sysfsServoOpenPosNs;
-      MumeSrv testee{sysfsSwitch, sysfsCount, sysfsServoOpenPosNs};
+      SysfsWriterMock sysfsServoClosePosNs;
+      MumeSrv testee{sysfsSwitch, sysfsCount, sysfsServoOpenPosNs, sysfsServoClosePosNs};
   };
 
   TEST_F(MumeSrv_Test, has_boolean_switchOn_property)
@@ -100,5 +101,25 @@ namespace
     ASSERT_EQ(1, args.count());
     ASSERT_DOUBLE_EQ(3.456, args[0].toDouble());
   }
+
+  TEST_F(MumeSrv_Test, write_3_456_via_setClosePositionMs_to_sysfs)
+  {
+    EXPECT_CALL(sysfsServoClosePosNs, write(QString("3456000"))).Times(1);
+    QMetaObject::invokeMethod(&testee, "setClosePositionMs", Q_ARG(double, 3.456));
+  }
+
+  TEST_F(MumeSrv_Test, write_setClosePositionMs_sends_signal)
+  {
+    EXPECT_CALL(sysfsServoClosePosNs, write(testing::_));
+    QSignalSpy spy{&testee, SIGNAL(closePositionMsChanged(double))};
+
+    QMetaObject::invokeMethod(&testee, "setClosePositionMs", Q_ARG(double, 3.456));
+
+    ASSERT_EQ(1, spy.count());
+    const auto args = spy[0];
+    ASSERT_EQ(1, args.count());
+    ASSERT_DOUBLE_EQ(3.456, args[0].toDouble());
+  }
+
 }
 

@@ -3,21 +3,31 @@
 
 #include "MumeSrv.hpp"
 
-MumeSrv::MumeSrv(const ISysfsReader &aSysfsSwitch, const ISysfsReader &aSysfsCount, ISysfsWriter &aSysfsServoOpenPosNs, QObject* parent) :
+MumeSrv::MumeSrv(const ISysfsReader &aSysfsSwitch, const ISysfsReader &aSysfsCount, ISysfsWriter &aSysfsServoOpenPosNs, ISysfsWriter &aSysfsServoClosePosNs, QObject* parent) :
   IMumeSrv{parent},
   sysfsSwitch{aSysfsSwitch},
   sysfsCount{aSysfsCount},
-  sysfsServoOpenPosNs{aSysfsServoOpenPosNs}
+  sysfsServoOpenPosNs{aSysfsServoOpenPosNs},
+  sysfsServoClosePosNs{aSysfsServoClosePosNs}
 {
+}
+
+static QString nsFromMs(double value)
+{
+  const quint32 ns = value * 1000*1000;
+  return QString::number(ns);
 }
 
 void MumeSrv::setOpenPositionMs(double value)
 {
-  const quint32 ns = value * 1000*1000;
-  const QString str = QString::number(ns);
-
-  sysfsServoOpenPosNs.write(str);
+  sysfsServoOpenPosNs.write(nsFromMs(value));
   openPositionMsChanged(value);
+}
+
+void MumeSrv::setClosePositionMs(double value)
+{
+  sysfsServoClosePosNs.write(nsFromMs(value));
+  closePositionMsChanged(value);
 }
 
 bool MumeSrv::isSwitchOn()

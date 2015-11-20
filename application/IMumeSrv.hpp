@@ -16,9 +16,11 @@ class IMumeSrv :
     virtual ~IMumeSrv();
 
     virtual void setOpenPositionMs(double value) = 0;
+    virtual void setClosePositionMs(double value) = 0;
 
   signals:
     void openPositionMsChanged(double value);
+    void closePositionMsChanged(double value);
 };
 
 #endif // IMUMESRV_H

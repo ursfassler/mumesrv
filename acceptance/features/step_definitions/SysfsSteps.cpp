@@ -33,6 +33,10 @@ namespace
   {
   }
 
+  GIVEN("^the sysfs file servo_close_pos_ns is writeable$")
+  {
+  }
+
   THEN("^I expect the content of the sysfs file servo_open_pos_ns to be \"([^\"]*)\"$")
   {
     REGEX_PARAM(std::string, expected);
@@ -41,5 +45,12 @@ namespace
     ASSERT_EQ(expected, context->sysfsServoOpenPosNs.content.toStdString());
   }
 
+  THEN("^I expect the content of the sysfs file servo_close_pos_ns to be \"([^\"]*)\"$")
+  {
+    REGEX_PARAM(std::string, expected);
+
+    cucumber::ScenarioScope<Context> context;
+    ASSERT_EQ(expected, context->sysfsServoClosePosNs.content.toStdString());
+  }
 
 }

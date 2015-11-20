@@ -15,22 +15,39 @@ namespace
       public testing::Test
   {
     public:
-      PersistenceMock persistence;
+      void SetUp() override
+      {
+        ON_CALL(persistence, read(testing::_, testing::_))
+            .WillByDefault(::testing::Return(QString{""}));
+      }
+
+      testing::NiceMock<PersistenceMock> persistence;
       MumeSrvMock mumeSrv;
       Application testee{persistence, mumeSrv};
   };
 
   TEST_F(Application_Test, load_servo_open_pos_from_persistence_on_init)
   {
-    EXPECT_CALL(persistence, read(QString{"servo"}, QString{"open_pos_ms"})).WillOnce(::testing::Return(QString{"0.012345"}));
+    ON_CALL(persistence, read(QString{"servo"}, QString{"open_pos_ms"}))
+        .WillByDefault(::testing::Return(QString{"0.012345"}));
     EXPECT_CALL(mumeSrv, setOpenPositionMs(0.012345)).Times(1);
+
+    testee.init();
+  }
+
+  TEST_F(Application_Test, load_servo_close_pos_from_persistence_on_init)
+  {
+    ON_CALL(persistence, read(QString{"servo"}, QString{"close_pos_ms"}))
+        .WillByDefault(::testing::Return(QString{"0.012345"}));
+    EXPECT_CALL(mumeSrv, setClosePositionMs(0.012345)).Times(1);
 
     testee.init();
   }
 
   TEST_F(Application_Test, does_not_set_servo_open_pos_if_not_defined_in_persistence)
   {
-    EXPECT_CALL(persistence, read(QString{"servo"}, QString{"open_pos_ms"})).WillOnce(::testing::Return(QString{""}));
+    ON_CALL(persistence, read(QString{"servo"}, QString{"open_pos_ms"}))
+        .WillByDefault(::testing::Return(QString{""}));
     EXPECT_CALL(mumeSrv, setOpenPositionMs(testing::_)).Times(0);
 
     testee.init();

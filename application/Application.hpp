@@ -8,6 +8,7 @@
 #include "IMumeSrv.hpp"
 
 #include <QObject>
+#include <functional>
 
 class Application :
     public QObject
@@ -21,10 +22,12 @@ class Application :
 
   private slots:
     void setOpenPositionMs(double value);
+    void setClosePositionMs(double value);
 
   private:
     IPersistence &persistence;
     IMumeSrv &mumeSrv;
+    void loadValue(QString key, std::function<void(IMumeSrv &, double)> writer);
 };
 
 #endif // APPLICATION_HPP

@@ -22,3 +22,18 @@ Scenario Outline: I write the servo open position and see the value written into
     | 1000         |    1000000000 |
     |    0.000001  |             1 |
     |    0.000123  |           123 |
+
+Scenario Outline: I write the servo close position and see the value written into the sysfs file
+  Given the sysfs file servo_close_pos_ns is writeable
+
+  When I call the DBus method setClosePositionMs with the argument <dbus value>
+
+  Then I expect the content of the sysfs file servo_close_pos_ns to be "<sysfs content>"
+
+  Examples:
+    |  dbus value  | sysfs content |
+    |    0         |             0 |
+    |    1         |       1000000 |
+    | 1000         |    1000000000 |
+    |    0.000001  |             1 |
+    |    0.000123  |           123 |
